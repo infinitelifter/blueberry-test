@@ -1,33 +1,16 @@
-import React from 'react';
-import { useQuery, gql } from '@apollo/client';
-import './App.css';
-import { TScore } from './types';
-
-const HIGH_SCORES = gql`
-  query GetHighScores {
-    allScores(orderBy: "score_DESC") {
-      player {
-        name
-      }
-      score
-    }
-  }
-`;
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { Routes } from "./Routes";
 
 const App = () => {
-  const { loading, error, data } = useQuery(HIGH_SCORES);
-
-  if (error) {
-    console.error(error);
-  }
-
   return (
     <div className="App">
-      {loading ? (
-        <p>Loading data...</p>
-      ) : (
-        <pre>{data.allScores.map((score: TScore) => `${score.player.name} : ${score.score}\n`)}</pre>
-      )}
+      <Router>
+        <Switch>
+          <Routes />
+        </Switch>
+      </Router>
     </div>
   );
 };

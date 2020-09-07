@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { ApolloClient, ApolloLink, from, HttpLink, ApolloProvider, InMemoryCache } from '@apollo/client';
+import React from "react";
+import ReactDOM from "react-dom";
+import {
+  ApolloClient,
+  ApolloLink,
+  from,
+  HttpLink,
+  ApolloProvider,
+  InMemoryCache,
+} from "@apollo/client";
 
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
 const httpLink = new HttpLink({
-  uri: 'https://hiring-backend-2048.herokuapp.com/admin/api',
+  uri: "https://hiring-backend-2048.herokuapp.com/admin/api",
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
-  const token = window.sessionStorage.getItem('token');
+  const token = window.sessionStorage.getItem("token");
   // add the authorization to the headers
   if (token) {
     operation.setContext({
@@ -35,7 +42,7 @@ ReactDOM.render(
       <App />
     </ApolloProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
